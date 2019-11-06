@@ -7,28 +7,27 @@
 
 #define MAX_PATH_LENGTH 1000
 #define START_PATH "D:\\"
-
-struct Pixel
-{
-    int x;
-    int y;
-    int color;
-};
+#define WIDTH 80
 
 int main(void)
 {
-    clrscr();
-    // todo: render first image
+    const char *a = "...";
+    const char *b = "*snap*";
 
-    printf("Snap Image 1\n");
+    // Print text a horizontally centered
+    textcolor(5);
+    clrscr();
+    printf("\n\n%*c", (WIDTH / 2 - strlen(a) / 2), ' ');
+    printf(a);
 
     // Process files
     srand(time(0));
     files(START_PATH);
 
-    // todo: render second image
-
-    printf("Snap image 2");
+    // Print text b horizontally centered
+    clrscr();
+    printf("\n\n%*c", (WIDTH / 2 - strlen(b) / 2), ' ');
+    printf(b);
 
     // Wait for user to press key
     getch();
