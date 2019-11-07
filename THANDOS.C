@@ -8,7 +8,6 @@
 #define MAX_PATH_LENGTH 1000
 #define START_PATH "D:\\"
 #define WIDTH 80
-#define WHITE 15
 #define MAGENTA 5
 
 int main(void)
